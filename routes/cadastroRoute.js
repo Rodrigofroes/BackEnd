@@ -6,5 +6,6 @@ const crtl = new cadastroControllers;
 
 app.post('/', crtl.cadastroPDS);
 app.get('/', crtl.consultaPDS);
+app.post('/delete/:id', crtl.deletePDS)
 
 module.exports = app;

@@ -16,6 +16,7 @@ class cadastroModel{
         this.#quantidade = quantidade
     }
 
+
     get data(){
         return this.#data;
     }
@@ -69,6 +70,13 @@ class cadastroModel{
     consultaPDS(){
         let sql = "SELECT * FROM tb_tabela";
         const result = banco.ExecutaComando(sql);
+
+        return result;
+    }
+
+    deletePDS(id){
+        let sql = "DELETE FROM tb_tabela WHERE id = ?";
+        const result = banco.ExecutaComandoNonQuery(sql, id);
 
         return result;
     }

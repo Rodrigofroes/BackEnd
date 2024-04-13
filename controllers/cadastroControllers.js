@@ -28,8 +28,24 @@ class cadastroControllers{
     async consultaPDS(req, res){
         const dados = new cadastroModel();
         const result = await dados.consultaPDS();
-        
         res.send(result);
+    }
+
+    async deletePDS(req, res){
+        const dados = new cadastroModel();
+        const result = await dados.deletePDS(req.params.id);
+
+        if(result){
+            res.send({
+                ok: true,
+                msg: "Excluido com sucesso"
+            })
+        } else {
+            res.send({
+                ok: false,
+                msg: "Não foi possivel  excluir"
+            })
+        }
     }
     
 
