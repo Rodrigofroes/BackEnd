@@ -4,12 +4,11 @@ class cadastroControllers{
 
     async cadastroPDS(req, res){
         const { data } = req.body;
-        const { nome } = req.body;
         const { atividade } = req.body;
         const { movimentacao } = req.body;
         const { quantidade } = req.body;
 
-        const dados = new cadastroModel(data,nome, atividade, movimentacao, quantidade);
+        const dados = new cadastroModel(data, quantidade, movimentacao, atividade);
         const result = await dados.cadastro();
 
         if(result){
@@ -43,12 +42,39 @@ class cadastroControllers{
         } else {
             res.send({
                 ok: false,
-                msg: "Não foi possivel  excluir"
+                msg: "Não foi possivel excluir"
             })
         }
     }
-    
 
+    async alteracaoPDS(req, res){
+        const { data } = req.body;
+        const { atividade } = req.body;
+        const { movimentacao } = req.body;
+        const { quantidade } = req.body;
+        const { id } = req.params;
+
+        const dados = new cadastroModel(data, quantidade, movimentacao, atividade);
+        const result = await dados.alteracaoPDS(id);
+
+        if(result){
+            res.send({
+                ok: true,
+                msg: "Alterado com sucesso"
+            })
+        } else {
+            res.send({
+                ok: false,
+                msg: "Não foi possivel alterar"
+            })
+        }
+    }
+
+    async consultaId(req, res){
+        const dados = new cadastroModel();
+        const result = await dados.consultaID(req.params.id);
+        res.send(result);
+    }
 }
 
 module.exports = cadastroControllers;

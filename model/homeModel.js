@@ -1,7 +1,7 @@
 const database = require('../utils/database');
 const banco =  new database();
 
-class cadastroModel{
+class homeModel{
     #data
     #quantidade
     #movimentacao
@@ -46,38 +46,6 @@ class cadastroModel{
         this.#quantidade = quantidade;
     }
 
-    cadastro(){
-        const dataCriacao = new Date();
-        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id) VALUES (?,?,?,?,?);"
-        let valores = [this.#data, this.#quantidade, dataCriacao, this.#movimentacao,this.#atividade];
-        console.log(valores);
-        const result = banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
-
-    consultaPDS(){
-        let sql = "SELECT * FROM tb_tabela";
-        const result = banco.ExecutaComando(sql);
-
-        return result;
-    }
-
-    deletePDS(id){
-        let sql = "DELETE FROM tb_tabela WHERE tabela_id = ?";
-        const result = banco.ExecutaComandoNonQuery(sql, id);
-
-        return result;
-    }
-
-    alteracaoPDS(id){
-        let sql = "UPDATE tb_tabela SET tabela_data = ?, tabela_quantidade = ?, mov_id = ?, ati_id = ? WHERE tabela_id = ?";
-        let valores = [this.#data, this.#quantidade, this.#movimentacao, this.#atividade, id];
-        const result = banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
-
     listagem(){
         let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id;";
         const result = banco.ExecutaComando(sql);
@@ -90,11 +58,17 @@ class cadastroModel{
         return result;
     }
 
-    consultaID(id){
-        let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id where tb_tabela.tabela_id = ?;";
-        const result = banco.ExecutaComando(sql, id);
+    movimentacao(){
+        let sql = "select * from tb_movimentacao";
+        const result = banco.ExecutaComando(sql);
+        return result;
+    }
+
+    atividade(){
+        let sql = "select * from tb_atividade";
+        const result = banco.ExecutaComando(sql);
         return result;
     }
 }
 
-module.exports = cadastroModel;
+module.exports = homeModel;
