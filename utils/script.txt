@@ -1,0 +1,41 @@
+create database futfanatics;
+use futfanatics;
+
+desc tb_tabela;
+
+create table tb_movimentacao(
+	mov_id int not null auto_increment primary key,
+    mov_nome varchar(255)
+);
+
+create table tb_atividade(
+	ati_id int not null auto_increment primary key,
+    ati_nome varchar(255)
+);
+
+create table tb_tabela(
+	tabela_id int not null auto_increment primary key,
+    tabela_data varchar(55) not null,
+    tabela_quantidade int not null,
+    tabela_dataCriacao date not null,
+    mov_id int not null,
+    ati_id int not null,
+    foreign key (mov_id) references tb_movimentacao (mov_id),
+    foreign key (ati_id) references tb_atividade (ati_id)
+);
+
+UPDATE tb_tabela SET tabela_data = '2020-03-14', tabela_quantidade = 100, mov_id = 2, ati_id = 2 WHERE tabela_id = 7;
+
+select * from tb_atividade;
+select * from tb_tabela;
+select * from  tb_movimentacao;
+
+select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela 
+inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id
+inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id;
+
+Banco na nuvem: 
+    host: 132.226.245.178
+    user: 10442313038
+    password: 10442313038
+    database: PFS1_10442313038
