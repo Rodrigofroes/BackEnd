@@ -1,27 +1,40 @@
 const homeModel = require('../model/homeModel');
 
-class homeControllers{
-    async listagem(req, res){
+class homeControllers {
+    async listagem(req, res) {
         const home = new homeModel();
         const result = await home.listagem();
         res.json(result);
     }
 
-    async grafico(req, res){
+    async grafico(req, res) {
         const home = new homeModel();
         const result = await home.grafico();
         res.json(result);
     }
 
-    async movimentacao(req, res){
+    async movimentacao(req, res) {
         const home = new homeModel();
         const result = await home.movimentacao();
         res.json(result);
     }
 
-    async atividade(req, res){
+    async atividade(req, res) {
         const home = new homeModel();
         const result = await home.atividade();
+        res.json(result);
+    }
+
+    async filtro(req, res) {
+        const dataInicio = req.query.dataInicio;
+        const dataFim = req.query.dataFinal;
+        console.log(dataInicio, dataFim)
+        const home = new homeModel();
+        const result = await home.filtro(
+            dataInicio,
+            dataFim
+        );
+    
         res.json(result);
     }
 }

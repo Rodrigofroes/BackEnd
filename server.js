@@ -3,8 +3,12 @@ const cadastroRoute = require('./routes/cadastroRoute');
 const homeRoute = require('./routes/homeRoute');
 const loginRoute = require('./routes/loginRoute');
 const cors = require('cors');
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerSpec = require('./swaggerConfig'); 
+
 
 const app = express();
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}))

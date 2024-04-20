@@ -53,7 +53,7 @@ class homeModel{
     }
 
     grafico(){
-        let sql = "select tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id;";
+        let sql = "select tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id";
         const result = banco.ExecutaComando(sql);
         return result;
     }
@@ -67,6 +67,13 @@ class homeModel{
     atividade(){
         let sql = "select * from tb_atividade";
         const result = banco.ExecutaComando(sql);
+        return result;
+    }
+
+    filtro(dataInicio, dataFim){
+        let sql = "select * from tb_tabela inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id inner join tb_movimentacao on tb_movimentacao.mov_id = tb_tabela.mov_id where tabela_data between ? and ? order by tabela_data;"
+        let valores = [dataInicio, dataFim];
+        const result = banco.ExecutaComando(sql, valores);
         return result;
     }
 }
