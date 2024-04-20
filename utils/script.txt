@@ -24,6 +24,24 @@ create table tb_tabela(
     foreign key (ati_id) references tb_atividade (ati_id)
 );
 
+
+INSERT INTO tb_atividade (ati_nome) VALUES
+('RME'),
+('CANCELADOS'),
+('ÚNICOS'),
+('RETORNO DE CADASTRO'),
+('RETORNO DE DEVOLUÇÃO'),
+('EXTRAVIO'),
+('EAN');
+
+INSERT INTO tb_movimentacao (mov_nome) VALUES
+('VERIFICAÇÃO'),
+('SUBTRAIR'),
+('REMANEJAR'),
+('PEDIDOS'),
+('ALOCAÇÃO'),
+('COLETAR EAN');
+
 UPDATE tb_tabela SET tabela_data = '2020-03-14', tabela_quantidade = 100, mov_id = 2, ati_id = 2 WHERE tabela_id = 7;
 
 select * from tb_atividade;
