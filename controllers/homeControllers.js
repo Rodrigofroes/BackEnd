@@ -27,12 +27,12 @@ class homeControllers {
 
     async filtro(req, res) {
         const dataInicio = req.query.dataInicio;
-        const dataFim = req.query.dataFinal;
-        console.log(dataInicio, dataFim)
+        const dataFinal = req.query.dataFinal;
+        console.log(dataInicio, dataFinal)
         const home = new homeModel();
         const result = await home.filtro(
             dataInicio,
-            dataFim
+            dataFinal
         );
     
         res.json(result);
