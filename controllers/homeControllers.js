@@ -37,6 +37,15 @@ class homeControllers {
     
         res.json(result);
     }
+
+    async download(req, res) {
+        const home = new homeModel();
+        const results = await home.download();
+        res.json(results);
+        
+    }
+
+
 }
 
 module.exports = homeControllers;

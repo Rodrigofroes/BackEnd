@@ -9,5 +9,6 @@ app.get('/grafico', crtl.grafico);
 app.get('/movimentacao', crtl.movimentacao);
 app.get('/atividade', crtl.atividade);
 app.get('/filtro', crtl.filtro);
+app.get('/download', crtl.download);
 
 module.exports = app;
