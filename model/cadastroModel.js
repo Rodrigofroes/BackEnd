@@ -6,12 +6,14 @@ class cadastroModel{
     #quantidade
     #movimentacao
     #atividade
+    #userId
 
-    constructor(data, quantidade, movimentacao, atividade){
+    constructor(data, quantidade, movimentacao, atividade, userId){
         this.#data = data,
         this.#quantidade = quantidade,
         this.#movimentacao = movimentacao,
-        this.#atividade = atividade
+        this.#atividade = atividade,
+        this.#userId = userId
     }
 
     get data(){
@@ -46,10 +48,17 @@ class cadastroModel{
         this.#quantidade = quantidade;
     }
 
+    get userId(){
+        return this.#userId;
+    }
+
+    set userId(userId){
+        this.#userId = userId;
+    }
+
     cadastro(){
-        const dataCriacao = new Date();
-        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id) VALUES (?,?,?,?,?);"
-        let valores = [this.#data, this.#quantidade, dataCriacao, this.#movimentacao,this.#atividade];
+        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id, user_id) VALUES (?,?,?,?,?,?);"
+        let valores = [this.#data, this.#quantidade, now(), this.#movimentacao,this.#atividade, this.#userId];
         console.log(valores);
         const result = banco.ExecutaComandoNonQuery(sql, valores);
 

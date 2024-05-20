@@ -7,8 +7,9 @@ class cadastroControllers{
         const { atividade } = req.body;
         const { movimentacao } = req.body;
         const { quantidade } = req.body;
+        const { userId } = req.cookies.usuarioLogado;
 
-        const dados = new cadastroModel(data, quantidade, movimentacao, atividade);
+        const dados = new cadastroModel(data, quantidade, movimentacao, atividade, userId);
         const result = await dados.cadastro();
 
         if(result){

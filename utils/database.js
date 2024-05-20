@@ -20,7 +20,6 @@ class database{
             database: 'futfanatics'
         });
     }
-
     // Comando DDL
     ExecutaComando(sql, valores){
         var cann = this.#conexao;
@@ -34,7 +33,6 @@ class database{
             });
         });
     }
-
     // Comando DML
     ExecutaComandoNonQuery(sql, valores){ 
         var cann = this.#conexao;

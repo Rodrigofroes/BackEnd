@@ -1,13 +1,15 @@
 const express = require('express');
 const cadastroControllers = require('../controllers/cadastroControllers');
+const AuthMiddleware = require('../middleware/authMiddleware');
 const app = express.Router();
 
 const crtl = new cadastroControllers;
+const auth = new AuthMiddleware;
 
-app.post('/register', crtl.cadastroPDS);
-app.get('/consulta', crtl.consultaPDS);
-app.get('/consulta/:id', crtl.consultaId);
-app.post('/delete/:id', crtl.deletePDS);
-app.post('/alteracao/:id', crtl.alteracaoPDS);
+app.post('/register', auth.veficarUsuario,  crtl.cadastroPDS);
+app.get('/consulta',  auth.veficarUsuario, crtl.consultaPDS);
+app.get('/consulta/:id', auth.veficarUsuario,  crtl.consultaId);
+app.post('/delete/:id', auth.veficarUsuario,  crtl.deletePDS);
+app.post('/alteracao/:id', auth.veficarUsuario,  crtl.alteracaoPDS);
 
 module.exports = app;

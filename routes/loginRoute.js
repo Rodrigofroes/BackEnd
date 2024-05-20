@@ -1,10 +1,12 @@
 const express = require('express');
-const middlewareControllers = require('../controllers/middlewareControllers');
+const loginController = require('../controllers/loginController');
+const usuarioController = require('../controllers/usuarioController');
 
 const app = express.Router();
-const auth = new middlewareControllers();
+const auth = new loginController();
+const ctrl = new usuarioController();
 
-app.get('/login', auth.auth);
-app.post('/register', auth.register);
+app.post('/login', auth.login);
+app.post('/cadastro', ctrl.cadastro);
 
 module.exports = app;

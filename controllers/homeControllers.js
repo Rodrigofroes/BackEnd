@@ -41,8 +41,7 @@ class homeControllers {
     async download(req, res) {
         const home = new homeModel();
         const results = await home.download();
-        res.json(results);
-        
+        res.json(results);   
     }
 
 
