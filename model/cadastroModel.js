@@ -57,8 +57,8 @@ class cadastroModel{
     }
 
     cadastro(){
-        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id, user_id) VALUES (?,?,?,?,?,?);"
-        let valores = [this.#data, this.#quantidade, now(), this.#movimentacao,this.#atividade, this.#userId];
+        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id, user_id) VALUES (?,?,now(),?,?,?);"
+        let valores = [this.#data, this.#quantidade, this.#movimentacao,this.#atividade, this.#userId];
         console.log(valores);
         const result = banco.ExecutaComandoNonQuery(sql, valores);
 
@@ -96,6 +96,22 @@ class cadastroModel{
     consultaID(id){
         let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id where tb_tabela.tabela_id = ?;";
         const result = banco.ExecutaComando(sql, id);
+        return result;
+    }
+
+    optionsPDS(){
+        let sql = "SELECT * FROM tb_tipo";
+        const result = banco.ExecutaComando(sql);
+
+        return result;
+    }
+
+    cadastroUser(usuario, senha, cargo){
+        let sql = "INSERT INTO tb_user (user_usuario, user_senha, tipo_id) VALUES (?,?,?);"
+        let valores = [usuario, senha, cargo];
+        console.log(valores);
+        const result = banco.ExecutaComandoNonQuery(sql, valores);
+
         return result;
     }
 }

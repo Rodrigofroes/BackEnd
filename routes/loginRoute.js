@@ -8,5 +8,6 @@ const ctrl = new usuarioController();
 
 app.post('/login', auth.login);
 app.post('/cadastro', ctrl.cadastro);
+// app.get('/validar', auth.validar);
 
 module.exports = app;

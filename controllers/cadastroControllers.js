@@ -1,4 +1,5 @@
 const cadastroModel = require('../model/cadastroModel');
+const Token = require('../utils/Token');
 
 class cadastroControllers{
 
@@ -7,7 +8,7 @@ class cadastroControllers{
         const { atividade } = req.body;
         const { movimentacao } = req.body;
         const { quantidade } = req.body;
-        const { userId } = req.cookies.usuarioLogado;
+        const userId = new Token().decodeToken(req.cookies.token);
 
         const dados = new cadastroModel(data, quantidade, movimentacao, atividade, userId);
         const result = await dados.cadastro();
@@ -75,6 +76,33 @@ class cadastroControllers{
         const dados = new cadastroModel();
         const result = await dados.consultaID(req.params.id);
         res.send(result);
+    }
+
+    async optionsPDS(req, res){
+        const dados = new cadastroModel();
+        const result = await dados.optionsPDS();
+        res.send(result);
+    }
+
+    async cadastroUser(req, res){
+        const { usuario } = req.body;
+        const { senha } = req.body;
+        const { cargo } = req.body;
+
+        const dados = new cadastroModel();
+        const result = await dados.cadastroUser(usuario, senha, cargo);
+
+        if(result){
+            res.send({
+                ok: true,
+                msg: "cadastrado com sucesso"
+            })
+        } else {
+            res.send({
+                ok: false,
+                msg: "cadastro mal sucedido"
+            })
+        }
     }
 }
 

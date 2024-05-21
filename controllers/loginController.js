@@ -1,3 +1,4 @@
+const Token = require('../utils/Token');
 const usarioModel = require('../model/usuarioModel');
 
 class loginController{
@@ -6,11 +7,12 @@ class loginController{
             let usuario = new usarioModel();
             usuario = await usuario.obterPorUsuarioSenha(req.body.usuario, req.body.senha);
             if(usuario != null) {
-                res.cookie("usuarioLogado", usuario.id);
-                res.send({
-                    msg: "Usuário logado com sucesso!",
-                });
-            }
+                // res.cookie("usuarioLogado", usuario.id);
+                res.cookie("token", new Token().encodeToken(usuario.id));
+                res.status(201).send({
+                    msg: "Usuário logado com sucesso!"
+                })
+            }   
             else {
                 res.send({
                     msg: "Usuário/Senha incorretos!"
@@ -23,6 +25,7 @@ class loginController{
             })
         }
     }
+
 }
 
 module.exports = loginController;
