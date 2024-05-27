@@ -8,7 +8,7 @@ class loginController{
             usuario = await usuario.obterPorUsuarioSenha(req.body.usuario, req.body.senha);
             if(usuario != null) {
                 // res.cookie("usuarioLogado", usuario.id);
-                res.cookie("token", new Token().encodeToken(usuario.id));
+                res.cookie("token", new Token().encodeToken(usuario.id, usuario.tipo));
                 res.status(201).send({
                     msg: "Usuário logado com sucesso!"
                 })

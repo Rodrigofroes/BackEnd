@@ -1,8 +1,9 @@
 class Token {
   // Gerar token
-  encodeToken(user_id, user_tipo) {
+  encodeToken(user_id, tipo_user) {
     const token = {
-      id: user_id
+      id: user_id,
+      tipo: tipo_user,
     };
     return btoa(JSON.stringify(token));
   }
