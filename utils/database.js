@@ -13,11 +13,10 @@ class database{
 
      constructor(){
         this.#conexao = banco.createConnection({
-            host: 'localhost',
-            port: '3306',
-            user: 'root',
-            password: '',
-            database: 'futfanatics'
+            host: '132.226.245.178',
+            user: '10442313038',
+            password: '10442313038',
+            database: 'PFS1_10442313038'
         });
     }
     // Comando DDL

@@ -6,11 +6,12 @@ const app = express.Router();
 const crtl = new homeControllers();
 const auth = new authMiddleware();
 
-app.get('/listagem', auth.veficarUsuario, crtl.listagem);
-app.get('/grafico', auth.veficarUsuario, crtl.grafico);
-app.get('/movimentacao', auth.veficarUsuario, crtl.movimentacao);
-app.get('/atividade', auth.veficarUsuario, crtl.atividade);
-app.get('/filtro', auth.veficarUsuario, crtl.filtro);
-app.get('/download', auth.veficarUsuario, crtl.download);
+app.get('/listagem', auth.veficarUsuario, crtl.listagem); //
+app.get('/grafico', auth.veficarUsuario, crtl.grafico); // 
+app.get('/grafico/:value', auth.veficarUsuario, crtl.graficoAno); // 
+app.get('/grafico/mes/:value', auth.veficarUsuario, crtl.graficoMes); //
+app.get('/movimentacao', auth.veficarUsuario, crtl.movimentacao); //
+app.get('/atividade', auth.veficarUsuario, crtl.atividade); //
+app.get('/options', auth.veficarUsuario,  crtl.options);
 
 module.exports = app;

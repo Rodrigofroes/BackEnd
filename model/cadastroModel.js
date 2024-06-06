@@ -57,17 +57,10 @@ class cadastroModel{
     }
 
     cadastro(){
-        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id, user_id) VALUES (?,?,now(),?,?,?);"
+        let sql = "INSERT INTO tb_tabela (tabela_data, tabela_quantidade, tabela_dataCriacao, mov_id, ati_id, id_user) VALUES (?,?,now(),?,?,?);"
         let valores = [this.#data, this.#quantidade, this.#movimentacao,this.#atividade, this.#userId];
         console.log(valores);
         const result = banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
-
-    consultaPDS(){
-        let sql = "SELECT * FROM tb_tabela";
-        const result = banco.ExecutaComando(sql);
 
         return result;
     }
@@ -99,21 +92,7 @@ class cadastroModel{
         return result;
     }
 
-    optionsPDS(){
-        let sql = "SELECT * FROM tb_tipo";
-        const result = banco.ExecutaComando(sql);
-
-        return result;
-    }
-
-    cadastroUser(usuario, senha, cargo){
-        let sql = "INSERT INTO tb_user (user_usuario, user_senha, tipo_id) VALUES (?,?,?);"
-        let valores = [usuario, senha, cargo];
-        console.log(valores);
-        const result = banco.ExecutaComandoNonQuery(sql, valores);
-
-        return result;
-    }
+    
 }
 
 module.exports = cadastroModel;

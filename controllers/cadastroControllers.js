@@ -26,11 +26,6 @@ class cadastroControllers{
         }
     }
 
-    async consultaPDS(req, res){
-        const dados = new cadastroModel();
-        const result = await dados.consultaPDS();
-        res.send(result);
-    }
 
     async deletePDS(req, res){
         const dados = new cadastroModel();
@@ -78,11 +73,6 @@ class cadastroControllers{
         res.send(result);
     }
 
-    async optionsPDS(req, res){
-        const dados = new cadastroModel();
-        const result = await dados.optionsPDS();
-        res.send(result);
-    }
 
     async cadastroUser(req, res){
         const { usuario } = req.body;

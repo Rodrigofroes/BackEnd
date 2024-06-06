@@ -13,6 +13,18 @@ class homeControllers {
         res.json(result);
     }
 
+    async graficoAno(req, res) {
+        const home = new homeModel();
+        const result = await home.graficoAno(req.params.value);
+        res.json(result);
+    }
+
+    async graficoMes(req, res) {
+        const home = new homeModel();
+        const result = await home.graficoMes(req.params.value);
+        res.json(result);
+    }
+
     async movimentacao(req, res) {
         const home = new homeModel();
         const result = await home.movimentacao();
@@ -24,27 +36,11 @@ class homeControllers {
         const result = await home.atividade();
         res.json(result);
     }
-
-    async filtro(req, res) {
-        const dataInicio = req.query.dataInicio;
-        const dataFinal = req.query.dataFinal;
-        console.log(dataInicio, dataFinal)
-        const home = new homeModel();
-        const result = await home.filtro(
-            dataInicio,
-            dataFinal
-        );
-    
-        res.json(result);
+    async options(req, res){
+        const dados = new homeModel();
+        const result = await dados.options();
+        res.send(result);
     }
-
-    async download(req, res) {
-        const home = new homeModel();
-        const results = await home.download();
-        res.json(results);   
-    }
-
-
 }
 
 module.exports = homeControllers;

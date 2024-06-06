@@ -47,20 +47,20 @@ class homeModel{
     }
 
     listagem(){
-        let sql = `select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome, tb_user.user_usuario  from  tb_tabela 
+        let sql = `select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome, tb_user.user_nome  from  tb_tabela 
                     inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id 
                     inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id 
-                    inner join tb_user on tb_tabela.user_id = tb_user.user_id
+                    inner join tb_user on tb_tabela.id_user = tb_user.id_user
                     ORDER BY tb_tabela.tabela_id DESC`;
         const result = banco.ExecutaComando(sql);
         return result;
     }
 
     grafico(){
-        let sql = `select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome, tb_user.user_usuario  from  tb_tabela 
+        let sql = `select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome, tb_user.user_nome from  tb_tabela 
         inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id 
         inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id 
-        inner join tb_user on tb_tabela.user_id = tb_user.user_id
+        inner join tb_user on tb_tabela.id_user = tb_user.id_user
         ORDER BY tb_tabela.tabela_data`
         const result = banco.ExecutaComando(sql);
         return result;
@@ -78,21 +78,26 @@ class homeModel{
         return result;
     }
 
-    filtro(dataInicio, dataFim){
-        let sql = "select * from tb_tabela inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id inner join tb_movimentacao on tb_movimentacao.mov_id = tb_tabela.mov_id where tabela_data between ? and ? order by tabela_data;"
-        let valores = [dataInicio, dataFim];
+    graficoAno(value){
+        let sql = "select * from tb_tabela inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id inner join tb_movimentacao on tb_movimentacao.mov_id = tb_tabela.mov_id where tabela_data like ? order by tabela_data;"
+        let valores = [value + '%'];
         const result = banco.ExecutaComando(sql, valores);
         return result;
     }
 
-    download() {
-        let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id ORDER BY tb_tabela.tabela_id DESC;";
-        const result =  banco.ExecutaComando(sql);
+    graficoMes(mes){
+        let sql = "select * from tb_tabela inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id inner join tb_movimentacao on tb_movimentacao.mov_id = tb_tabela.mov_id where tabela_data like ? order by tabela_data;"
+        let valores = ['%' + mes + '%'];
+        const result = banco.ExecutaComando(sql, valores);
         return result;
-        
     }
 
-   
+    options(){
+        let sql = "SELECT * FROM tb_tipo";
+        const result = banco.ExecutaComando(sql);
+
+        return result;
+    }
 }
 
 module.exports = homeModel;

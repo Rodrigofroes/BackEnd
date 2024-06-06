@@ -1,14 +1,12 @@
 class Token {
-  // Gerar token
-  encodeToken(user_id, tipo_user) {
+  encodeToken(id_user, tipo_user) {
     const token = {
-      id: user_id,
+      id: id_user,
       tipo: tipo_user,
     };
     return btoa(JSON.stringify(token));
   }
 
-  // Retornar id
   decodeToken(token) {
     const data = JSON.parse(atob(token));
     return data.id;
