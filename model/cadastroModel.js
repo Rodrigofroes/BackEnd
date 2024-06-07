@@ -92,6 +92,36 @@ class cadastroModel{
         return result;
     }
 
+    atividadeInsert(value){
+        let sql = "INSERT INTO tb_atividade (ati_nome) VALUES (?);";
+        let valores = [value];
+        const result = banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
+    movimentacaoInsert(value){
+        let sql = "INSERT INTO tb_movimentacao (mov_nome) VALUES (?);";
+        let valores = [value];
+        const result = banco.ExecutaComandoNonQuery(sql, valores);
+
+        return result;
+    }
+
+    deleteAtividade(id){
+        let sql = "DELETE FROM tb_atividade WHERE ati_id = ?";
+        const result = banco.ExecutaComandoNonQuery(sql, id);
+
+        return result;
+    }
+
+    consultaAtividade(id){
+        let sql = "SELECT * FROM tb_atividade WHERE ati_id = ?";
+        const result = banco.ExecutaComando(sql, id);
+        return result;
+    }
+    
+
     
 }
 

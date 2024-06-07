@@ -67,13 +67,13 @@ class homeModel{
     }
 
     movimentacao(){
-        let sql = "select * from tb_movimentacao";
+        let sql = "select * from tb_movimentacao ORDER BY mov_nome AND mov_id ASC";
         const result = banco.ExecutaComando(sql);
         return result;
     }
 
     atividade(){
-        let sql = "select * from tb_atividade";
+        let sql = "select * from tb_atividade ORDER BY ati_nome AND ati_id ASC";
         const result = banco.ExecutaComando(sql);
         return result;
     }

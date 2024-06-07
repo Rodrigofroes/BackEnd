@@ -73,27 +73,34 @@ class cadastroControllers{
         res.send(result);
     }
 
-
-    async cadastroUser(req, res){
-        const { usuario } = req.body;
-        const { senha } = req.body;
-        const { cargo } = req.body;
-
+    async atividade(req, res){
+        const { atividade } = req.body;
+        console.log(atividade)
         const dados = new cadastroModel();
-        const result = await dados.cadastroUser(usuario, senha, cargo);
-
-        if(result){
-            res.send({
-                ok: true,
-                msg: "cadastrado com sucesso"
-            })
-        } else {
-            res.send({
-                ok: false,
-                msg: "cadastro mal sucedido"
-            })
-        }
+        const result = await dados.atividadeInsert(atividade);
+        res.send(result);
     }
+
+    async movimentacao(req, res){
+        const { movimentacao } = req.body;
+        const dados = new cadastroModel();
+        const result = await dados.movimentacaoInsert(movimentacao);
+        res.send(result);
+    }
+
+    async deleteAtividade(req, res){
+        const dados = new cadastroModel();
+        const result = await dados.deleteAtividade(req.params.id);
+
+        return result
+    }
+
+    async consultaAtividade(req, res){
+        const dados = new cadastroModel();
+        const result = await dados.consultaAtividade(req.params.id);
+        res.send(result);
+    }
+
 }
 
 module.exports = cadastroControllers;
