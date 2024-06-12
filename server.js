@@ -2,6 +2,7 @@ const express = require("express");
 const cadastroRoute = require("./routes/cadastroRoute");
 const homeRoute = require("./routes/homeRoute");
 const loginRoute = require("./routes/loginRoute");
+const usuarioRoute = require("./routes/usuarioRoute");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 // const swaggerUi = require('swagger-ui-express');
@@ -23,6 +24,7 @@ app.use(cors({
 app.use("/cadastro", cadastroRoute);
 app.use("/consultar", homeRoute);
 app.use("/auth", loginRoute);
+app.use("/usuario", usuarioRoute);
 
 app.listen(8000, () => {
   console.log("Online");

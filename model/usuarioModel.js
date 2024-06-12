@@ -102,6 +102,27 @@ class usuarioModel{
         return null;
     }
 
+    async excluir(){
+        let sql = "DELETE FROM tb_user WHERE id_user = ?";
+        let valores = [this.#id];
+        const result = await banco.ExecutaComandoNonQuery(sql, valores);
+        return result;
+    }
+
+    async listar(){
+        let sql = "SELECT * FROM tb_user WHERE id_user = ?";
+        let valores = [this.#id];
+        const result = await banco.ExecutaComando(sql, valores);
+        return result;
+    }
+
+    async alterar(){
+        let sql = "UPDATE tb_user SET user_nome = ?, user_senha = ?, tipo_user = ? WHERE id_user = ?";
+        let valores = [this.#usuario, this.#senha, this.#tipo, this.#id];
+        const result = await banco.ExecutaComandoNonQuery(sql, valores);
+        return result;
+    }
+
 }
 
 module.exports = usuarioModel;
