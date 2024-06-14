@@ -3,6 +3,9 @@ const cadastroRoute = require("./routes/cadastroRoute");
 const homeRoute = require("./routes/homeRoute");
 const loginRoute = require("./routes/loginRoute");
 const usuarioRoute = require("./routes/usuarioRoute");
+const atividadeRoute = require("./routes/atividadeRoute");
+const movimentacaoRoute = require("./routes/movimentacaoRoute");
+const depositoRoute = require("./routes/depositoRoute");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 // const swaggerUi = require('swagger-ui-express');
@@ -25,6 +28,9 @@ app.use("/cadastro", cadastroRoute);
 app.use("/consultar", homeRoute);
 app.use("/auth", loginRoute);
 app.use("/usuario", usuarioRoute);
+app.use("/atividade", atividadeRoute);
+app.use("/movimentacao", movimentacaoRoute);
+app.use("/deposito", depositoRoute)
 
 app.listen(8000, () => {
   console.log("Online");
