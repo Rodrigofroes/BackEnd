@@ -49,7 +49,7 @@ class cadastroControllers{
         const { atividade } = req.body;
         const { movimentacao } = req.body;
         const { quantidade } = req.body;
-        const { id } = req.params;
+        const { id } = req.body;
 
         const dados = new cadastroModel(data, quantidade, movimentacao, atividade);
         const result = await dados.alteracaoPDS(id);
