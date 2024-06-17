@@ -72,10 +72,10 @@ class cadastroModel{
         return result;
     }
 
-    alteracaoPDS(id){
+    async alteracaoPDS(id){
         let sql = "UPDATE tb_tabela SET tabela_data = ?, tabela_quantidade = ?, mov_id = ?, ati_id = ? WHERE tabela_id = ?";
         let valores = [this.#data, this.#quantidade, this.#movimentacao, this.#atividade, id];
-        const result = banco.ExecutaComandoNonQuery(sql, valores);
+        const result = await banco.ExecutaComando(sql, valores);
 
         return result;
     }
@@ -87,7 +87,7 @@ class cadastroModel{
     }
 
     consultaID(id){
-        let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_atividade.ati_nome  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id where tb_tabela.tabela_id = ?;";
+        let sql = "select tb_tabela.tabela_id, tb_tabela.tabela_data, tb_tabela.tabela_quantidade,  tb_movimentacao.mov_nome, tb_movimentacao.mov_id, tb_atividade.ati_nome, tb_atividade.ati_id  from  tb_tabela inner join tb_movimentacao on  tb_movimentacao.mov_id = tb_tabela.mov_id inner join tb_atividade on tb_atividade.ati_id = tb_tabela.ati_id where tb_tabela.tabela_id = ?;";
         const result = banco.ExecutaComando(sql, id);
         return result;
     }
