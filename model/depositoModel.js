@@ -74,9 +74,9 @@ class depositoModel {
         return result;
     }
 
-    async inserirDeposito(entrada, saida, id_user, mes) {
-        let sql = "INSERT INTO tb_deposito (entrada, saida, id_user, dataCriacao) VALUES (?, ?, ?, now());";
-        let valores = [entrada, saida, id_user, mes];
+    async inserirDeposito(entrada, saida, id_user, data) {
+        let sql = "INSERT INTO tb_deposito (entrada, saida, dataCriacao, id_user) VALUES (?, ?, ?, ?);";
+        let valores = [entrada, saida, data, id_user];
         const result = await banco.ExecutaComandoNonQuery(sql, valores);
         return result;
     }
@@ -88,9 +88,9 @@ class depositoModel {
         return result;
     }
 
-    async atualizarDeposito() {
-        let sql = "UPDATE tb_deposito SET entrada = ?, saida = ?, id_user = ?, mes = ? WHERE id = ?";
-        let valores = [this.#entrada, this.#saida, this.#user, this.#mes, this.#id];
+    async atualizarDeposito(id, entrada, saida, data) {
+        let sql = "UPDATE tb_deposito SET entrada = ?, saida = ?,  dataCriacao = ? WHERE id = ?";
+        let valores = [entrada, saida, data, id];
         const result = await banco.ExecutaComandoNonQuery(sql, valores);
         return result;
     }
@@ -103,8 +103,8 @@ class depositoModel {
     }
 
     async listarDepositoPorAno(ano) {
-        let sql = "SELECT * FROM tb_deposito WHERE ano = ?";
-        let valores = [ano];
+        let sql = "SELECT * FROM tb_deposito WHERE dataCriacao LIKE ? ORDER BY dataCriacao ASC;";
+        let valores = [`${ano}%`]; 
         const result = await banco.ExecutaComando(sql, valores);
         return result;
     }
